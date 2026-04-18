@@ -1,15 +1,29 @@
-import { Geist, Geist_Mono } from "next/font/google"
+import type { Metadata } from "next"
+import { Fraunces, Geist, Geist_Mono } from "next/font/google"
+import { ClerkProvider } from "@clerk/nextjs"
 
 import "@workspace/ui/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@workspace/ui/lib/utils";
+import { TooltipProvider } from "@workspace/ui/components/tooltip"
+import { cn } from "@workspace/ui/lib/utils"
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'})
-
-const fontMono = Geist_Mono({
+const fontSans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
+const fontMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" })
+const fontDisplay = Fraunces({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-display",
+  display: "swap",
+  axes: ["SOFT", "opsz"],
 })
+
+export const metadata: Metadata = {
+  title: {
+    default: "Podviva — the podcast control room",
+    template: "%s · Podviva",
+  },
+  description:
+    "API and MCP-first podcast platform. Agentic production, human uploads, hosting, translation, distribution — one control room.",
+}
 
 export default function RootLayout({
   children,
@@ -17,14 +31,35 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "#f07a3a",
+          colorBackground: "#191922",
+          colorText: "#f4f4f5",
+          colorInputBackground: "#1f1f2a",
+          colorInputText: "#f4f4f5",
+          fontFamily: "var(--font-sans)",
+          borderRadius: "0.5rem",
+        },
+      }}
     >
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
+      <html
+        lang="en"
+        suppressHydrationWarning
+        className={cn(
+          "antialiased",
+          fontSans.variable,
+          fontMono.variable,
+          fontDisplay.variable,
+        )}
+      >
+        <body className="bg-background text-foreground font-sans min-h-svh">
+          <ThemeProvider defaultTheme="dark">
+            <TooltipProvider delayDuration={200}>{children}</TooltipProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
