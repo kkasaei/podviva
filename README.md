@@ -69,10 +69,13 @@ The Next.js app is wired for Cloudflare Workers via [`@opennextjs/cloudflare`](h
 ```bash
 cd apps/web
 
-# Preview the production build locally in workerd
+# Build the Worker bundle into apps/web/.open-next
+pnpm cf:build
+
+# Preview the production build locally in workerd (builds first)
 pnpm preview
 
-# Deploy to Cloudflare
+# Deploy to Cloudflare (builds first)
 pnpm deploy
 ```
 
