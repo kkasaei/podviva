@@ -7,7 +7,10 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "turbo format",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "cf:build": "pnpm --filter web cf:build",
+    "cf:preview": "pnpm --filter web preview",
+    "cf:deploy": "pnpm --filter web deploy"
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",
