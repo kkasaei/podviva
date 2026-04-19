@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Fraunces, Geist, Geist_Mono } from "next/font/google"
+import Script from "next/script"
 import { ClerkProvider } from "@clerk/nextjs"
 
 import "@workspace/ui/globals.css"
@@ -60,6 +61,16 @@ export default function RootLayout({
           <ThemeProvider defaultTheme="dark">
             <TooltipProvider delayDuration={200}>{children}</TooltipProvider>
           </ThemeProvider>
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-184X2NEX2H"
+            strategy="afterInteractive"
+          />
+          <Script id="ga-init" strategy="afterInteractive">
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-184X2NEX2H');`}
+          </Script>
         </body>
       </html>
     </ClerkProvider>
