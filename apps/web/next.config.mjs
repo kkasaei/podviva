@@ -12,16 +12,8 @@ const nextConfig = {
   images: {
     remotePatterns: [{ protocol: "https", hostname: "picsum.photos" }],
   },
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.podviva.com" }],
-        destination: "https://podviva.com/:path*",
-        permanent: true,
-      },
-    ]
-  },
+  // www.podviva.com → podviva.com is handled in middleware.ts so the redirect
+  // runs inside the Worker and preserves the full pathname reliably.
 }
 
 export default nextConfig
