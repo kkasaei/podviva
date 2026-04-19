@@ -26,6 +26,12 @@ coverage
 out/
 build
 dist
+.open-next/
+
+# Cloudflare / wrangler
+.wrangler/
+.dev.vars
+cloudflare-env.d.ts
 
 
 # Debug

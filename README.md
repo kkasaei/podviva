@@ -62,6 +62,32 @@ pnpm lint         # turbo lint
 pnpm format       # prettier across the workspace
 ```
 
+## Deploying to Cloudflare
+
+The Next.js app is wired for Cloudflare Workers via [`@opennextjs/cloudflare`](https://opennext.js.org/cloudflare). Worker config lives in `apps/web/wrangler.jsonc`; the OpenNext adapter config lives in `apps/web/open-next.config.ts`.
+
+```bash
+cd apps/web
+
+# Preview the production build locally in workerd
+pnpm preview
+
+# Deploy to Cloudflare
+pnpm deploy
+```
+
+First-time setup: `wrangler login`, then set secrets (they don't live in `wrangler.jsonc`):
+
+```bash
+wrangler secret put CLERK_SECRET_KEY
+wrangler secret put NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+# …repeat for any phase-2 secrets you actually use
+```
+
+The apex `podviva.com` is served by the Worker; `www.podviva.com` 308-redirects to apex (see `next.config.mjs`). Both hostnames are declared as custom domains in `wrangler.jsonc`.
+
+SEO surfaces (`/sitemap.xml`, `/robots.txt`) are generated from `app/sitemap.ts` and `app/robots.ts`.
+
 ## Environment
 
 Required in phase 1 (Clerk test keys):

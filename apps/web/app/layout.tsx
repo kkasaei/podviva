@@ -17,12 +17,14 @@ const fontDisplay = Fraunces({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://podviva.com"),
   title: {
     default: "Podviva — the podcast control room",
     template: "%s · Podviva",
   },
   description:
     "API and MCP-first podcast platform. Agentic production, human uploads, hosting, translation, distribution — one control room.",
+  alternates: { canonical: "/" },
 }
 
 export default function RootLayout({
