@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Fraunces, Geist, Geist_Mono } from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
 import Script from "next/script"
 import { ClerkProvider } from "@clerk/nextjs"
 
@@ -10,12 +10,6 @@ import { cn } from "@workspace/ui/lib/utils"
 
 const fontSans = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
 const fontMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" })
-const fontDisplay = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-  axes: ["SOFT", "opsz"],
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://podviva.com"),
@@ -54,7 +48,6 @@ export default function RootLayout({
           "antialiased",
           fontSans.variable,
           fontMono.variable,
-          fontDisplay.variable,
         )}
       >
         <body className="bg-background text-foreground font-sans min-h-svh">

@@ -10,8 +10,8 @@
 @theme inline {
     --font-sans: var(--font-sans);
     --font-mono: var(--font-mono);
-    --font-display: var(--font-display);
-    --font-heading: var(--font-display);
+    --font-display: var(--font-sans);
+    --font-heading: var(--font-sans);
 
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -161,10 +161,12 @@
     }
     h1, h2, h3, h4, h5, h6 {
         font-family: var(--font-display);
+        font-weight: 600;
         letter-spacing: -0.02em;
     }
     .font-display {
         font-family: var(--font-display);
+        font-weight: 600;
         letter-spacing: -0.015em;
     }
     .font-mono,
